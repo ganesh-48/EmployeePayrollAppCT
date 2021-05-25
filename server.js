@@ -18,9 +18,10 @@ mongoose.Promise = global.Promise;
 
 // Connecting to the database
 mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }).then(() => {
-    console.log("Successfully connected to the database");    
+    console.log("Successfully connected to the database");
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
@@ -28,8 +29,11 @@ mongoose.connect(dbConfig.url, {
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to Employee Payroll Application."});
+    res.json({ "message": "Welcome to Employee Payroll Application." });
 });
+
+// Require employee payroll routes
+require('./app/routers/employeepayroll.routers.js')(app);
 
 // listen for requests
 app.listen(5500, () => {
