@@ -2,20 +2,9 @@ const EmployeePayroll = require('../models/employeepayroll.model.js');
 
 // Create and Save a employee data
 exports.create = (req, res) => {
-    var abc = 0;
-    if (!req.body.firstName) {
-        abc = 1;
-    }
-    if (!req.body.lastName) {
-        abc = 1;
-    }
-    if (!req.body.emailId) {
-        abc = 1;
-    }
-    if (!req.body.password) { abc = 1; }
-    if (abc == 1) {
+    if (!req.body) {
         return res.status(400).send({
-            message: "Your are missing some data!!"
+            message: "Your are missing some data!!"   
         });
     }
 
@@ -74,20 +63,9 @@ exports.findOne = (req, res) => {
 // Update a employee payroll identified by the employeepayrollId in the request
 exports.update = (req, res) => {
     // Validate Request
-    var abc = 0;
-    if (!req.body.firstName) {
-        abc = 1;
-    }
-    if (!req.body.lastName) {
-        abc = 1;
-    }
-    if (!req.body.emailId) {
-        abc = 1;
-    }
-    if (!req.body.password) { abc = 1; }
-    if (abc == 1) {
+    if (!req.body) {
         return res.status(400).send({
-            message: "Your are missing some data!!"
+            message: "Your are missing some data!!"   
         });
     }
 
