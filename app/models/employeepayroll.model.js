@@ -30,7 +30,7 @@ const EmployeeSchema = new mongoose.Schema({
 EmployeeSchema.pre('save', function(next) {
     var employee = this;
 
-    // only hash the password if it has been modified (or is new)
+    // only hash the password if it has been modified
     if (!employee.isModified('password')) return next();
 
     // generate a salt
