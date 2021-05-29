@@ -31,3 +31,5 @@ coverage
 # Bo
 
 .env
+
+node_modules

@@ -1,6 +1,7 @@
 const EmployeePayroll = require('../models/employeepayroll.js');
 const  data   = require('../validation/employee.js');
 
+
 // Create and Save a employee data
 exports.create = (req, res) => { 
    
