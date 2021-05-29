@@ -1,7 +1,8 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
+const url = 'mongodb://localhost:27017/employees';
 
 module.exports = () => {
-    const url = 'mongodb://localhost:27017/employeeInfo';
 
     mongoose.Promise = global.Promise;
 

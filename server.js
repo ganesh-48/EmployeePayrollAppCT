@@ -1,7 +1,9 @@
 const express = require('express');
 
 // Configuring the database
-const dbConfig = require('./config/database.config.js');
+const dbConfig = require('./config/database.js');
+
+dbConfig();
 
 // create express app
 const app = express();
@@ -18,11 +20,11 @@ app.get('/', (req, res) => {
 });
 
 // Require employee payroll routes
-require('./app/routers/employeepayroll.routers.js')(app);
+require('./app/routers/employeepayroll.js')(app);
 
 // listen for requests
-dbConfig().then(() => {
-    app.listen(5500, () => {
-        console.log("Server is listening on port 5500");
-    });
+
+app.listen(5500, () => {
+    console.log("Server is listening on port 5500");
 });
+

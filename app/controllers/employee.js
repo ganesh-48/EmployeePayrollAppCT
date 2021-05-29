@@ -1,13 +1,18 @@
-const EmployeePayroll = require('../models/employeepayroll.model.js');
+const EmployeePayroll = require('../models/employeepayroll.js');
+const  data   = require('../validation/employee.js');
 
 // Create and Save a employee data
-exports.create = (req, res) => {
-    if (!req.body) {
+exports.create = (req, res) => { 
+   
+   var result =  data.validate(req.body);
+    console.log("result");
+    if (result.error) {
         return res.status(400).send({
-            message: "Your are missing some data!!"   
+            message: result.error.details[0].message   
         });
     }
 
+    
     //create an object 
     const employeepayroll = new EmployeePayroll({
         firstName: req.body.firstName,
@@ -63,9 +68,11 @@ exports.findOne = (req, res) => {
 // Update a employee payroll identified by the employeepayrollId in the request
 exports.update = (req, res) => {
     // Validate Request
-    if (!req.body) {
+    var result =  data.validate(req.body);
+    console.log("result");
+    if (result.error) {
         return res.status(400).send({
-            message: "Your are missing some data!!"   
+            message: result.error.details[0].message   
         });
     }
 
@@ -116,3 +123,4 @@ exports.delete = (req, res) => {
             });
         });
 };
+
