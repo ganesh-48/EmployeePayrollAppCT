@@ -1,4 +1,5 @@
 const employeeDetails = require("../models/employeepayroll.js");
+const { error } = require("../validation/employee.js");
 
 class RegisterService {
 
@@ -8,6 +9,22 @@ class RegisterService {
                     return callBack(error,null);
                 return callBack(null,data)
           })
+    }
+
+    findAll = (callBack) => {
+        employeeDetails.findAll((error,data) => {
+            if(error)
+                return callBack(error,null);
+            return callBack(null,data)
+        }) 
+    }
+
+    findById = (employeeDataId, callBack) => {
+        employeeDetails.findById(employeeDataId, (error, data) => {
+            if(error)
+                return callBack(error, null);
+            return callBack(null, data)
+        })
     }
 }
 

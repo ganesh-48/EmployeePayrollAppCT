@@ -5,10 +5,10 @@ module.exports = (app) => {
     app.post('/add', employeeDetails.create);
 
     // Retrieve all employeeDetails
-    app.get('/', employeeDetails.findAll);
+    app.get('/getdata', employeeDetails.findAll);
 
     // Retrieve a single employeeDetails with employeeId
-    app.get('/:employeepayrollId', employeeDetails.findOne);
+    app.get('/find/:employeepayrollId', employeeDetails.findOne);
 
     // Update a employeeDetails with employeeId
     app.put('/update/:employeepayrollId', employeeDetails.update);

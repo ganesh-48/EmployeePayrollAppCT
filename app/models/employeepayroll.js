@@ -21,13 +21,34 @@ class EmployeeModel {
         });
 
         employeepayroll.save({}, (error, data) => {
-            if(error){
+            if (error) {
                 return callBack(error, null);
             }
             return callBack(null, data);
         });
     }
 
+    // Retrieve and return all employee payroll from the database.
+    findAll = (callBack) => {
+        EmployeePayroll.find({},(error,data) =>{
+            if (error) {
+                return callBack(error, null);
+            } else {
+                return callBack(null, data);
+            }
+        })
+    };
+
+    findById = (employeeDataId, callBack) => {
+        EmployeePayroll.findById(employeeDataId, (error,data) => {
+            if(error) {
+                return callBack(error, null);
+            } else {
+                return callBack(null, data);
+            }
+        })
+    }
 }
+
 
 module.exports = new EmployeeModel();
