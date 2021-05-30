@@ -1,8 +1,9 @@
 const EmployeePayroll = require('../models/employeepayroll.js');
 const data = require('../validation/employee.js');
 const { genSaltSync, hashSync } = require("bcrypt");
+const service = require('../service/employee.js');
 
-class employeeDetails {
+class EmployeeDetails {
     // Create and Save a employee data
     create = (req, res) => {
 
@@ -17,22 +18,18 @@ class employeeDetails {
         const salt = genSaltSync(10);
         req.body.password = hashSync(req.body.password, salt);
 
-        //create an object 
-        const employeepayroll = new EmployeePayroll({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            emailId: req.body.emailId,
-            password: req.body.password
-        });
-
-        employeepayroll.save()
-            .then(data => {
-                res.send(data);
-            }).catch(err => {
-                res.status(500).send({
-                    message: err.message || "Some error occurred while creating the employee payroll."
-                });
-            });
+        let employeeData = req.body;
+        service.create(employeeData, (error, data) => {
+            if (error) {
+                return res.status(500).send({
+                    message: "Some data is "
+                })
+            }
+            res.send({
+                message: "Employee data is added successfully in database!",
+                data: data
+            })
+        })
     };
 
     // Retrieve and return all employee payroll from the database.
@@ -127,7 +124,5 @@ class employeeDetails {
                 });
             });
     };
-
 }
-
-module.exports = new employeeDetails();
+module.exports = new EmployeeDetails();
