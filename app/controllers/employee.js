@@ -40,7 +40,7 @@ class EmployeeDetails {
                 })
             }
             res.send({
-                message:  "Employee data is added successfully in database!",
+                message:  "Getted all employees data!",
                 data:  data
             })
         })
@@ -73,8 +73,22 @@ class EmployeeDetails {
             })
         })
     }
-  
-  
+
+    delete = (req, res) => {
+        let employeeDataId = req.params.employeepayrollId;
+        service.findByIdAndRemove(employeeDataId, (error, data) => {
+            if(error) {
+                return res.status(500).send({
+                    message: "Employee Id not found"
+                })
+            }
+            res.send({
+                data: data
+            })
+        })
+    }
+}
+module.exports = new EmployeeDetails();
     /*
                 //create an object 
                 const employeepayroll = new EmployeePayroll({
@@ -164,7 +178,7 @@ class EmployeeDetails {
                     });
                 });
         };
-*/
+
         // Delete a employee payroll with the specified employeepayrollId in the request
         delete = (req, res) => {
             EmployeePayroll.findByIdAndRemove(req.params.employeepayrollId)
@@ -186,5 +200,4 @@ class EmployeeDetails {
                     });
                 });
         };
-}
-module.exports = new EmployeeDetails();
+*/

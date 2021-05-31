@@ -61,8 +61,17 @@ class EmployeeModel {
             } else {
                 return callBack(null, data);
             }
-        }
-        )
+        })
+    }
+
+    findByIdAndRemove = (employeeDataId, callBack) => {
+        EmployeePayroll.findByIdAndRemove(employeeDataId, (error, data) => {
+            if (error) {
+                return callBack(error, null);
+            } else {
+                return callBack(null, data);
+            }
+        })
     }
 }
 

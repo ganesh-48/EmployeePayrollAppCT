@@ -3,6 +3,11 @@ const { error } = require("../validation/employee.js");
 
 class RegisterService {
 
+    /**
+     * @description Create and save employee data then send a response to controller
+     * @method Save is used to save employee data
+     * @param callBack is the callBack to controller
+     */
     create = (employeeData, callBack) => {
           employeeDetails.create( employeeData,(error,data) => {
                 if(error) 
@@ -33,6 +38,14 @@ class RegisterService {
                   return callBack(error,null);
               return callBack(null,data)
         })
+  }
+
+  findByIdAndRemove = (employeeDataId, callBack) => {
+      employeeDetails.findByIdAndRemove(employeeDataId, (error,data) => {
+        if(error)
+            return callBack(error, null);
+        return callBack(null, data);
+      })
   }
 }
 
