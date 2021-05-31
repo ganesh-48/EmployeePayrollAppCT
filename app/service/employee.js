@@ -26,6 +26,14 @@ class RegisterService {
             return callBack(null, data)
         })
     }
+
+    findByIdAndUpdate = (newData,employeeDataId, callBack) => {
+        employeeDetails.findByIdAndUpdate(newData,employeeDataId,(error,data) => {
+              if(error) 
+                  return callBack(error,null);
+              return callBack(null,data)
+        })
+  }
 }
 
 module.exports = new RegisterService();

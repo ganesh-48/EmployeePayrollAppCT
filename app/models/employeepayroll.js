@@ -30,7 +30,7 @@ class EmployeeModel {
 
     // Retrieve and return all employee payroll from the database.
     findAll = (callBack) => {
-        EmployeePayroll.find({},(error,data) =>{
+        EmployeePayroll.find({}, (error, data) => {
             if (error) {
                 return callBack(error, null);
             } else {
@@ -40,15 +40,32 @@ class EmployeeModel {
     };
 
     findById = (employeeDataId, callBack) => {
-        EmployeePayroll.findById(employeeDataId, (error,data) => {
-            if(error) {
+        EmployeePayroll.findById(employeeDataId, (error, data) => {
+            if (error) {
                 return callBack(error, null);
             } else {
                 return callBack(null, data);
             }
         })
     }
+
+    findByIdAndUpdate = (newData, employeeDataId, callBack) => {
+        EmployeePayroll.findByIdAndUpdate(employeeDataId, {
+            firstName: newData.firstName,
+            lastName: newData.lastName,
+            emailId: newData.emailId,
+            password: newData.password
+        }, { new: true }, (error, data) => {
+            if (error) {
+                return callBack(error, null);
+            } else {
+                return callBack(null, data);
+            }
+        }
+        )
+    }
 }
+
 
 
 module.exports = new EmployeeModel();
