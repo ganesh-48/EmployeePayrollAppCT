@@ -1,10 +1,25 @@
 const mongoose = require('mongoose');
 
 const EmployeeSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
-    emailId: String,
-    password: String
+    firstName: {
+        type : String,
+        required: true,
+        validate : /^[A-Z]{1}[A-Za-z\\s]{1,}$/
+    },
+    lastName: {
+        type : String,
+        required: true,
+        validate : /^[A-Z]{1}[A-Za-z\\s]{1,}$/
+    },
+    emailId:  {
+        type : String,
+        required: true,
+        validate :  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    } ,
+    password: {
+        type : String,
+        required: true,
+    }
 }, {
     timestamps: true
 });
