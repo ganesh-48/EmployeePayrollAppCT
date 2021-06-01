@@ -8,5 +8,4 @@ const data = joi.object({
   password: joi.string().pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')).required(),
 });
 
-
 module.exports = data

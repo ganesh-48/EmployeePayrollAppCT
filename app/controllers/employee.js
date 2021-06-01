@@ -1,10 +1,13 @@
-const EmployeePayroll = require('../models/employeepayroll.js');
 const data = require('../validation/employee.js');
-const { genSaltSync, hashSync } = require("bcrypt");
 const service = require('../service/employee.js');
 
 class EmployeeDetails {
-    // Create and Save a employee data
+   
+     /**
+     * @description Create and save the employee data after validation
+     * @param req is request sent from http
+     * @param res is used to send the response
+     */
     create = (req, res) => {
 
         var result = data.validate(req.body);
@@ -14,9 +17,6 @@ class EmployeeDetails {
                 message: result.error.details[0].message
             });
         }
-
-        const salt = genSaltSync(10);
-        req.body.password = hashSync(req.body.password, salt);
 
         let employeeData = req.body;
         service.create(employeeData, (error, data) => {
@@ -32,10 +32,15 @@ class EmployeeDetails {
         })
     };
 
+    /**
+     * @description find all the employee data
+     * @param req is request sent from http
+     * @param res is used to send the response
+     */
     findAll = (req, res) => {
         service.findAll( (error, data) => {
             if (error) {
-                return res.status(500).send({
+                return res.status(404).send({
                     message:  "some error is occurred!"
                 })
             }
@@ -46,11 +51,16 @@ class EmployeeDetails {
         })
     }
 
+     /**
+     * @description find one the employee data using employee id
+     * @param req is request sent from http
+     * @param res is used to send the response
+     */
     findOne = (req,res) => {
         let employeeDataId = req.params.employeepayrollId;
         service.findById(employeeDataId, (error,data) => {
             if(error) {
-                return res.status(500).send({
+                return res.status(404).send({
                     message: "some error is occurred"
                 })
             }
@@ -60,6 +70,11 @@ class EmployeeDetails {
         })
     }
 
+    /**
+      * @description update employee data by using employee id after the data validation
+      * @param req is request sent from http
+      * @param res is used to send the response
+      */
     update = (req, res) => {
         let employeeDataId = req.params.employeepayrollId;
         service.findByIdAndUpdate(req.body,employeeDataId, (error,data) => {
@@ -74,6 +89,11 @@ class EmployeeDetails {
         })
     }
 
+    /**
+     * @description find the one employee data using employee id and Delete employee data
+     * @param req is request sent from http
+     * @param res is used to send the response
+     */
     delete = (req, res) => {
         let employeeDataId = req.params.employeepayrollId;
         service.findByIdAndRemove(employeeDataId, (error, data) => {

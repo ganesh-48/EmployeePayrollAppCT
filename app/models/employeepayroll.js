@@ -12,6 +12,12 @@ const EmployeeSchema = new mongoose.Schema({
 const EmployeePayroll = mongoose.model('Employee', EmployeeSchema);
 
 class EmployeeModel {
+
+    /**
+   * @description Create method  to save the employee data
+   * @param employeeData is  sent from Service
+   * @return callback is used to callback Service
+   */
     create = (employeeData, callBack) => {
         const employeepayroll = new EmployeePayroll({
             firstName: employeeData.firstName,
@@ -21,34 +27,49 @@ class EmployeeModel {
         });
 
         employeepayroll.save({}, (error, data) => {
-            if (error) {
+            return (error) ? callBack(error, null) : callBack(null, data);
+            /*if (error) {
                 return callBack(error, null);
             }
-            return callBack(null, data);
+            return callBack(null, data);*/
         });
     }
 
-    // Retrieve and return all employee payroll from the database.
+    /**
+    * @description retrive all the employee data from MongoDB
+    * @return callback is used to callback Services
+    */
     findAll = (callBack) => {
         EmployeePayroll.find({}, (error, data) => {
-            if (error) {
+            return (error) ? callBack(error, null) : callBack(null, data);
+            /*if (error) {
                 return callBack(error, null);
             } else {
                 return callBack(null, data);
-            }
+            }*/
         })
     };
 
+    /**
+   * @description retrive the employee data using a employee id from MongoDB
+   * @return callback is used to callback Service
+   */
     findById = (employeeDataId, callBack) => {
         EmployeePayroll.findById(employeeDataId, (error, data) => {
-            if (error) {
+            return (error) ? callBack(error, null) : callBack(null, data);
+            /*if (error) {
                 return callBack(error, null);
             } else {
                 return callBack(null, data);
-            }
+            }*/
         })
     }
 
+    /**
+     * @description Update the employee data by using a employee id
+     * @param oldemployee_Id, NewData
+     * @return callback is used to callback Service
+     */
     findByIdAndUpdate = (newData, employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndUpdate(employeeDataId, {
             firstName: newData.firstName,
@@ -56,21 +77,27 @@ class EmployeeModel {
             emailId: newData.emailId,
             password: newData.password
         }, { new: true }, (error, data) => {
-            if (error) {
+            return (error) ? callBack(error, null) : callBack(null, data);
+            /*if (error) {
                 return callBack(error, null);
             } else {
                 return callBack(null, data);
-            }
+            }*/
         })
     }
 
+    /**
+        * @description delete the employee data using a employee id from MongoDB
+        * @return callback is used to callback Service     
+    */
     findByIdAndRemove = (employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndRemove(employeeDataId, (error, data) => {
-            if (error) {
+            return (error) ? callBack(error, null) : callBack(null, data);
+            /*if (error) {
                 return callBack(error, null);
             } else {
                 return callBack(null, data);
-            }
+            }*/
         })
     }
 }
