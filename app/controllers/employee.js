@@ -90,7 +90,7 @@ class EmployeeDetails {
     }
 
     /**
-     * @description find the one employee data using employee id and Delete employee data
+     * @description find the one employee data using employee id and delete employee data
      * @param req is request sent from http
      * @param res is used to send the response
      */
@@ -107,7 +107,26 @@ class EmployeeDetails {
             })
         })
     }
+
+    /**
+     * @description login the employee data using correct employee details
+     * @param req sent from http having emailId and password
+     * @param res is send the response
+     */
+    login = (req, res) => {
+        service.checkLogin(req.body, (error, data) =>{
+            if(error) {
+                return res.status(404).send({
+                    message: "User login Details are not found!!"
+                })
+            }
+            res.send({
+                data: data
+            })
+        })
+    }
 }
+
 module.exports = new EmployeeDetails();
     /*
                 //create an object 

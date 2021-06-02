@@ -1,6 +1,7 @@
 const employeeDetails = require('../controllers/employee.js');
 
 module.exports = (app) => {
+    
     // Create a new employeeDetails
     app.post('/add', employeeDetails.create);
 
@@ -15,4 +16,7 @@ module.exports = (app) => {
 
     // Delete a employeeDetails with employeeId
     app.delete('/delete/:employeepayrollId', employeeDetails.delete);
+
+    //Userlogin with a emailId and password
+    app.get('/userlogin', employeeDetails.login);
 }

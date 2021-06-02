@@ -71,6 +71,17 @@ class RegisterService {
             return callBack(null, data);*/
         })
     }
+
+    /**
+    * @description checklogin  of user using emailId and password
+    * @param userloginData need a correct emailId and password
+    * @return callback is used to callback service
+    */
+    checkLogin = (userloginData, callBack) => {
+        employeeDetails.checkLogin(userloginData, (error, data) => {
+            return (error) ? callBack(error, null) : callBack(null, data);
+        })
+    }
 }
 
 module.exports = new RegisterService();

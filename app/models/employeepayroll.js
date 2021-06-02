@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const EmployeeSchema = new mongoose.Schema({
     firstName: {
@@ -14,6 +15,7 @@ const EmployeeSchema = new mongoose.Schema({
     emailId:  {
         type : String,
         required: true,
+        createIndexes: true,
         validate :  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     } ,
     password: {
@@ -115,8 +117,22 @@ class EmployeeModel {
             }*/
         })
     }
+
+    /**
+    * @description checklogin  of user using emailId and password
+    * @param userloginData need to enter correct emailId and password
+    * @return callback is used to callback service
+    */
+    checkLogin = (userloginData, callBack) => {
+        EmployeePayroll.findOne({ "emailId" : userloginData.emailId}, (error, data) => {
+            if(error) {
+                return callBack(error, null);
+            } if(!data){
+                return callBack("Invalid login Details", data);
+            }
+            return (bcrypt.compareSync(userloginData.password, data.password)) ? callBack(null, "User Login Successfull!!") : callBack("Invalid user login Details", null);
+        })
+    }
 }
-
-
 
 module.exports = new EmployeeModel();
