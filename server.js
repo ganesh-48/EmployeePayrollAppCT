@@ -23,8 +23,6 @@ app.get('/', (req, res) => {
 require('./app/routers/employeepayroll.js')(app);
 
 // listen for requests
-
-app.listen(5500, () => {
-    console.log("Server is listening on port 5500");
+app.listen(process.env.port, () => {
+    console.log("Server is listening on port:", process.env.port);
 });
-
