@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const EmployeeSchema = new mongoose.Schema({
     firstName: {
@@ -56,7 +55,7 @@ class EmployeeModel {
     * @description retrive all the employee data from MongoDB
     * @return callback is used to callback Services
     */
-    findAll = (callBack) => {
+    findUsersAllData = (callBack) => {
         EmployeePayroll.find({}, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error) {
@@ -71,7 +70,7 @@ class EmployeeModel {
    * @description retrive the employee data using a employee id from MongoDB
    * @return callback is used to callback Service
    */
-    findById = (employeeDataId, callBack) => {
+    findUserid = (employeeDataId, callBack) => {
         EmployeePayroll.findById(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error) {
@@ -87,7 +86,7 @@ class EmployeeModel {
      * @param oldemployee_Id, NewData
      * @return callback is used to callback Service
      */
-    findByIdAndUpdate = (newData, employeeDataId, callBack) => {
+    updateUserData = (newData, employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndUpdate(employeeDataId, {
             firstName: newData.firstName,
             lastName: newData.lastName,
@@ -105,9 +104,9 @@ class EmployeeModel {
 
     /**
         * @description delete the employee data using a employee id from MongoDB
-        * @return callback is used to callback Service     
+        * @return callback is used to callback service file     
     */
-    findByIdAndRemove = (employeeDataId, callBack) => {
+    findUserIdAndRemove = (employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndRemove(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error) {
@@ -127,10 +126,10 @@ class EmployeeModel {
         EmployeePayroll.findOne({ "emailId" : userloginData.emailId}, (error, data) => {
             if(error) {
                 return callBack(error, null);
-            } if(!data){
-                return callBack("Invalid login Details", data);
-            }
-            return (bcrypt.compareSync(userloginData.password, data.password)) ? callBack(null, "User Login Successfull!!") : callBack("Invalid user login Details", null);
+            }// if(!data){
+               // return callBack("Invalid login Details", data);
+            //}
+            return (!data) ? callBack("user doesn't exist", null) : callBack(null, data);
         })
     }
 }

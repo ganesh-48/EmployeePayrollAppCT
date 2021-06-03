@@ -38,7 +38,7 @@ class EmployeeDetails {
      * @param res is used to send the response
      */
     findAll = (req, res) => {
-        service.findAll( (error, data) => {
+        service.findUsersAllData( (error, data) => {
             if (error) {
                 return res.status(404).send({
                     message:  "some error is occurred!"
@@ -58,7 +58,7 @@ class EmployeeDetails {
      */
     findOne = (req,res) => {
         let employeeDataId = req.params.employeepayrollId;
-        service.findById(employeeDataId, (error,data) => {
+        service.findUserId(employeeDataId, (error,data) => {
             if(error) {
                 return res.status(404).send({
                     message: "some error is occurred"
@@ -77,7 +77,7 @@ class EmployeeDetails {
       */
     update = (req, res) => {
         let employeeDataId = req.params.employeepayrollId;
-        service.findByIdAndUpdate(req.body,employeeDataId, (error,data) => {
+        service.findUserIdAndUpdate(req.body,employeeDataId, (error,data) => {
             if(error) {
                 return res.status(404).send({
                     message: " Employee payroll id not found "
@@ -96,7 +96,7 @@ class EmployeeDetails {
      */
     delete = (req, res) => {
         let employeeDataId = req.params.employeepayrollId;
-        service.findByIdAndRemove(employeeDataId, (error, data) => {
+        service.findUserIdAndRemove(employeeDataId, (error, data) => {
             if(error) {
                 return res.status(500).send({
                     message: "Employee Id not found"
@@ -114,15 +114,19 @@ class EmployeeDetails {
      * @param res is send the response
      */
     login = (req, res) => {
-        service.checkLogin(req.body, (error, data) =>{
+        let userloginData = req.body;
+        service.checkLogin(userloginData, (error, data) =>{
             if(error) {
                 return res.status(404).send({
-                    message: "User login Details are not found!!"
+                    success : 0,
+                    message: error
                 })
             }
             res.send({
-                data: data
-            })
+                success : 1,
+                message : "User Login Successfull!!",
+                token : data
+            });
         })
     }
 }

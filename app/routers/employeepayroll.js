@@ -18,5 +18,5 @@ module.exports = (app) => {
     app.delete('/delete/:employeepayrollId', employeeDetails.delete);
 
     //Userlogin with a emailId and password
-    app.get('/userlogin', employeeDetails.login);
+    app.post('/userlogin', employeeDetails.login);
 }

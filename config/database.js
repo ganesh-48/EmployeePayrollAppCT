@@ -1,12 +1,12 @@
-require('dotenv/config')
+require('dotenv').config();
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/employees';
+//const url = 'mongodb://localhost:27017/employees';
 
 module.exports = () => {
 
     mongoose.Promise = global.Promise;
 
-    return mongoose.connect(url, {
+    return mongoose.connect(process.env.databaseurl, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {

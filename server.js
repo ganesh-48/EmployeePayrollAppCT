@@ -2,7 +2,7 @@ const express = require('express');
 
 // Configuring the database
 const dbConfig = require('./config/database.js');
-
+require("dotenv").config();
 dbConfig();
 
 // create express app

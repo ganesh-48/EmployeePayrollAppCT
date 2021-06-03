@@ -1,5 +1,8 @@
 const employeeDetails = require("../models/employeepayroll.js");
 const { genSaltSync, hashSync } = require("bcrypt");
+const { sign }= require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+require("dotenv").config();
 
 class RegisterService {
 
@@ -23,8 +26,8 @@ class RegisterService {
     * @description retrive all the employee data
     * @return callback is used to callback Controller 
     */
-    findAll = (callBack) => {
-        employeeDetails.findAll((error, data) => {
+    findUsersAllData = (callBack) => {
+        employeeDetails.findUsersAllData((error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
                 return callBack(error, null);
@@ -36,8 +39,8 @@ class RegisterService {
     * @description retrive employee data
     * @return callback is used to callback Controller 
     */
-    findById = (employeeDataId, callBack) => {
-        employeeDetails.findById(employeeDataId, (error, data) => {
+    findUserid = (employeeDataId, callBack) => {
+        employeeDetails.findUserid(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
                 return callBack(error, null);
@@ -50,8 +53,8 @@ class RegisterService {
     * @param newData is data sent from Controller
     * @return callback is used to callback Controller
     */
-    findByIdAndUpdate = (newData, employeeDataId, callBack) => {
-        employeeDetails.findByIdAndUpdate(newData, employeeDataId, (error, data) => {
+      updateUserData = (newData, employeeDataId, callBack) => {
+        employeeDetails.updateUserData(newData, employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
                 return callBack(error, null);
@@ -63,8 +66,8 @@ class RegisterService {
     * @description delete employee data using employee id
     * @return callback is used to callback Controller
     */
-    findByIdAndRemove = (employeeDataId, callBack) => {
-        employeeDetails.findByIdAndRemove(employeeDataId, (error, data) => {
+    findUserIdAndRemove = (employeeDataId, callBack) => {
+        employeeDetails.findUserIdAndRemove(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
                 return callBack(error, null);
@@ -75,11 +78,21 @@ class RegisterService {
     /**
     * @description checklogin  of user using emailId and password
     * @param userloginData need a correct emailId and password
-    * @return callback is used to callback service
+    * @return callback is used to callback collector
     */
     checkLogin = (userloginData, callBack) => {
         employeeDetails.checkLogin(userloginData, (error, data) => {
-            return (error) ? callBack(error, null) : callBack(null, data);
+            //return (error) ? callBack(error, null) : callBack(null, data);
+            let result=null;
+            if (error) {
+                return callBack(error, null);
+            }
+            else if (result=bcrypt.compareSync(userloginData.password, data.password)) {
+                data.password = undefined;
+                const jsontoken = sign({ result: data }, process.env.jwt, { expiresIn: "2h" });
+                return callBack(null, jsontoken);
+            }
+            return callBack("Invalid userlogindata", null);
         })
     }
 }
