@@ -37,7 +37,7 @@ class EmployeeDetails {
      * @param req is request sent from http
      * @param res is used to send the response
      */
-    findAll = (req, res) => {
+    findAllUsersData = (req, res) => {
         service.findUsersAllData( (error, data) => {
             if (error) {
                 return res.status(404).send({
@@ -56,7 +56,7 @@ class EmployeeDetails {
      * @param req is request sent from http
      * @param res is used to send the response
      */
-    findOne = (req,res) => {
+    findOneUserData = (req,res) => {
         let employeeDataId = req.params.employeepayrollId;
         service.findUserid(employeeDataId, (error,data) => {
             if(error) {
@@ -75,7 +75,7 @@ class EmployeeDetails {
       * @param req is request sent from http
       * @param res is used to send the response
       */
-    update = (req, res) => {
+    updateUserData = (req, res) => {
         let employeeDataId = req.params.employeepayrollId;
         service.findUserIdAndUpdate(req.body,employeeDataId, (error,data) => {
             if(error) {
@@ -94,7 +94,7 @@ class EmployeeDetails {
      * @param req is request sent from http
      * @param res is used to send the response
      */
-    delete = (req, res) => {
+    deleteUserData = (req, res) => {
         let employeeDataId = req.params.employeepayrollId;
         service.findUserIdAndRemove(employeeDataId, (error, data) => {
             if(error) {

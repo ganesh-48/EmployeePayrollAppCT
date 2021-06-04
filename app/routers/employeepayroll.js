@@ -7,16 +7,16 @@ module.exports = (app) => {
     app.post('/add', checkToken, employeeDetails.create);
 
     // Retrieve all employeeDetails
-    app.get('/getdata', checkToken, employeeDetails.findAll);
+    app.get('/getdata', checkToken, employeeDetails.findAllUsersData);
 
     // Retrieve a single employeeDetails with employeeId
-    app.get('/find/:employeepayrollId', checkToken, employeeDetails.findOne);
+    app.get('/find/:employeepayrollId', checkToken, employeeDetails.findOneUserData);
 
     // Update a employeeDetails with employeeId
-    app.put('/update/:employeepayrollId', checkToken, employeeDetails.update);
+    app.put('/update/:employeepayrollId', checkToken, employeeDetails.updateUserData);
 
     // Delete a employeeDetails with employeeId
-    app.delete('/delete/:employeepayrollId', checkToken, employeeDetails.delete);
+    app.delete('/delete/:employeepayrollId', checkToken, employeeDetails.deleteUserData);
 
     //Userlogin with a emailId and password
     app.post('/userlogin', employeeDetails.login);
