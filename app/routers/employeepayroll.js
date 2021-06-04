@@ -1,5 +1,5 @@
 const employeeDetails = require('../controllers/employee.js');
-const { checkToken } = require('../../authentication/authentication.js');
+const { checkToken } = require('../../authentication/tokens.js');
 
 module.exports = (app) => {
     
