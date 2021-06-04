@@ -53,8 +53,8 @@ class RegisterService {
     * @param newData is data sent from Controller
     * @return callback is used to callback Controller
     */
-      updateUserData = (newData, employeeDataId, callBack) => {
-        employeeDetails.updateUserData(newData, employeeDataId, (error, data) => {
+      findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
+        employeeDetails.findUserIdAndUpdate(newData, employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
                 return callBack(error, null);

@@ -58,7 +58,7 @@ class EmployeeDetails {
      */
     findOne = (req,res) => {
         let employeeDataId = req.params.employeepayrollId;
-        service.findUserId(employeeDataId, (error,data) => {
+        service.findUserid(employeeDataId, (error,data) => {
             if(error) {
                 return res.status(404).send({
                     message: "some error is occurred"
@@ -118,12 +118,12 @@ class EmployeeDetails {
         service.checkLogin(userloginData, (error, data) =>{
             if(error) {
                 return res.status(404).send({
-                    success : 0,
+                    success : false,
                     message: error
                 })
             }
             res.send({
-                success : 1,
+                success : true,
                 message : "User Login Successfull!!",
                 token : data
             });

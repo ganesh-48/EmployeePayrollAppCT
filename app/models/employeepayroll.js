@@ -86,7 +86,7 @@ class EmployeeModel {
      * @param oldemployee_Id, NewData
      * @return callback is used to callback Service
      */
-    updateUserData = (newData, employeeDataId, callBack) => {
+     findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndUpdate(employeeDataId, {
             firstName: newData.firstName,
             lastName: newData.lastName,
