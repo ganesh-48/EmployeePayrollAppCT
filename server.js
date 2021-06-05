@@ -23,6 +23,4 @@ app.get('/', (req, res) => {
 require('./app/routers/employeepayroll.js')(app);
 
 // listen for requests
-app.listen(process.env.port, () => {
-    console.log("Server is listening on port:", process.env.port);
-});
+module.exports = app.listen(process.env.port, () => console.log("Server is listening on port " + process.env.port));
