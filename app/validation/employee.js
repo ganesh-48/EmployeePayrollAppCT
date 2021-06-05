@@ -1,4 +1,3 @@
-
 const joi = require("@hapi/joi");
 
 const data = joi.object({

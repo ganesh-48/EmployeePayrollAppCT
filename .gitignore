@@ -32,6 +32,6 @@ coverage
 
 .env
 
-middleware
+dummy
 
 node_modules
