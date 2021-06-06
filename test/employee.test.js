@@ -194,3 +194,18 @@ describe("/PUT /update/Id", () => {
             });
     });
 });
+
+describe("/Delele /Id", () => { 
+    
+    it("it should delete employeeData successfully with valid token and Object Id ", done => {
+        chai
+            .request(server)
+            .delete("/delete/"+employeetest.Data5.Id)
+            .set('Authorization', 'bearar ' + token)
+            .end((err, response) => {
+                response.should.have.status(200);
+                response.body.should.have.property('success').eq(true);
+                done();
+            });
+    });
+});
