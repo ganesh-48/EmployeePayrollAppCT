@@ -163,3 +163,19 @@ describe("/GET /find/Id", () => {
             });
     });
 });
+
+describe("/PUT /update/Id", () => { 
+    it("it should update employeeData successfully with valid token and Object Id ", done => {
+        const employeeData = employeetest.Data3;
+        chai
+            .request(server)
+            .put("/update/"+employeetest.Data5.Id)
+            .set('Authorization', 'bearar ' + token)
+            .send(employeeData)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('success').eq(true);
+            done();
+            });
+    });
+});
