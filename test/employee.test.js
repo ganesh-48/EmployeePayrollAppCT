@@ -149,4 +149,17 @@ describe("/GET /find/Id", () => {
             done();
             });
     });
+
+    it("it not should give employeeData  with valid token and invalid and Object Id ", done => {
+        
+        chai
+            .request(server)
+            .get("/find/"+employeetest.Data6.Id)
+            .set('Authorization', 'bearar ' + token)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property('success').eq(false);
+            done();
+            });
+    });
 });
