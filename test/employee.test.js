@@ -77,3 +77,34 @@ describe('POST/add', () => {
             });
     });
 });
+
+let token='';
+    console.log(token);
+beforeEach(done => {
+    chai
+        .request(server)
+        .post("/userlogin")
+        .send(employeetest.Data1)
+        .end((err, res) => {
+            token = res.body.token;
+            res.should.have.status(200);
+            done();
+        });
+});
+
+describe("/GET /getdata", () => { 
+    
+    it("it should fetch all employeeData successfully with valid token ", done => {
+        console.log(token);
+        chai
+            .request(server)
+            .get("/getdata")
+            .set('Authorization', 'bearar ' + token)
+            .end((err, response) => {
+                response.should.have.status(200);
+                response.body.should.have.property('message').eq("Getted all employees data!")
+                response.body.should.have.property('data')
+                done();
+            });
+    });
+});
