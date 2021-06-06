@@ -178,4 +178,19 @@ describe("/PUT /update/Id", () => {
             done();
             });
     });
+
+    it("it should not update employeeData with valid token and invalid Object Id ", done => {
+        const employeeData = employeetest.Data3;
+        chai
+            .request(server)
+            .put("/update/"+employeetest.Data6.Id)
+            .set('Authorization', 'bearar ' + token)
+            .send(employeeData)
+            .end((err, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property('success').eq(false);
+                res.body.should.have.property('message').eq(" Employee payroll id not found ");
+            done();
+            });
+    });
 });
