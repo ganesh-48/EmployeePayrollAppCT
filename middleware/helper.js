@@ -7,7 +7,7 @@ module.exports = {
             token = token.slice(7);
             jwt.verify(token, process.env.jwt , ( error, decoded ) => {
                 if(error) {
-                    res.json({
+                    return res.status(400).send({
                         success: false,
                         message: "Invalid token"
                     });
@@ -17,7 +17,7 @@ module.exports = {
                 }
             });
         } else {
-            res.json({
+            return res.status(401).send({
                 success: false,
                 message: "Access denied! unauthorized user"
             });

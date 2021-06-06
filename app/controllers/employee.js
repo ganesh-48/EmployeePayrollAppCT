@@ -65,10 +65,12 @@ class EmployeeDetails {
         service.findUserid(employeeDataId, (error,data) => {
             if(error) {
                 return res.status(404).send({
+                    success: false,
                     message: "some error is occurred"
                 })
             }
             res.send({
+                success:true,
                 data:  data
             })
         })
@@ -84,10 +86,12 @@ class EmployeeDetails {
         service.findUserIdAndUpdate(req.body,employeeDataId, (error,data) => {
             if(error) {
                 return res.status(404).send({
+                    success: false,
                     message: " Employee payroll id not found "
                 })
             }
             res.send({
+                success: true,
                 data: data
             })
         })
@@ -102,11 +106,13 @@ class EmployeeDetails {
         let employeeDataId = req.params.employeepayrollId;
         service.findUserIdAndRemove(employeeDataId, (error, data) => {
             if(error) {
-                return res.status(500).send({
+                return res.status(404).send({
+                    success: false,
                     message: "Employee Id not found"
                 })
             }
             res.send({
+                success: true,
                 data: data
             })
         })
