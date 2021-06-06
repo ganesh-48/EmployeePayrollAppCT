@@ -11,7 +11,6 @@ class EmployeeDetails {
     create = (req, res) => {
 
         var result = data.validate(req.body);
-        console.log("result");
         if (result.error) {
             return res.status(400).send({
                 success:false,
@@ -44,10 +43,12 @@ class EmployeeDetails {
         service.findUsersAllData( (error, data) => {
             if (error) {
                 return res.status(404).send({
+                    success: false,
                     message:  "some error is occurred!"
                 })
             }
             res.send({
+                success: true, 
                 message:  "Getted all employees data!",
                 data:  data
             })
