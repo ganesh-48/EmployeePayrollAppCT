@@ -208,4 +208,17 @@ describe("/Delele /Id", () => {
                 done();
             });
     });
+
+    it("it not should delete employeeData  with valid token and invalid and Object Id ", done => {
+        chai
+            .request(server)
+            .delete("/delete/"+employeetest.Data6.Id)
+            .set('Authorization', 'bearar ' + token)
+            .end((err, response) => {
+                response.should.have.status(404);
+                response.body.should.have.property('success').eq(false);
+                done();
+            });
+    });
+
 });
