@@ -135,3 +135,18 @@ describe("/GET /getdata", () => {
 });
 
 
+describe("/GET /find/Id", () => { 
+    
+    it("it should give employeeData successfully with valid token and Object Id", done => {
+        chai
+            .request(server)
+            .get("/find/"+employeetest.Data5.Id)
+            .set('Authorization', 'bearar ' + token)
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('success').eq(true);
+                res.body.should.have.property('data');
+            done();
+            });
+    });
+});
