@@ -118,6 +118,20 @@ describe("/GET /getdata", () => {
             done();
             });
     });
+
+    it("it should not fetch all employeeData with empty token ", done => {
+        var emptyToken='';
+        chai
+            .request(server)
+            .get("/getdata")
+            .set('Authorization', emptyToken)
+            .end((err, res) => {
+                res.should.have.status(401);
+                res.body.should.have.property('success').eq(false);
+                res.body.should.have.property('message').eq("Access denied! unauthorized user")
+            done();
+            });
+    });
 });
 
 
