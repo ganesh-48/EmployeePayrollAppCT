@@ -14,6 +14,7 @@ class EmployeeDetails {
         console.log("result");
         if (result.error) {
             return res.status(400).send({
+                success:false,
                 message: result.error.details[0].message
             });
         }
@@ -22,10 +23,12 @@ class EmployeeDetails {
         service.create(employeeData, (error, data) => {
             if (error) {
                 return res.status(500).send({
+                   success: false,
                     message:  "some error is occurred!"
                 })
             }
-            res.send({
+            res.status(200).send({
+                success: true,
                 message:  "Employee data is added successfully in database!",
                 data:  data
             })

@@ -4,7 +4,7 @@ const { checkToken } = require('../../middleware/helper.js');
 module.exports = (app) => {
     
     // Create a new employeeDetails
-    app.post('/add', checkToken, employeeDetails.create);
+    app.post('/add', employeeDetails.create);
 
     // Retrieve all employeeDetails
     app.get('/getdata', checkToken, employeeDetails.findAllUsersData);
