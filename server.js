@@ -1,5 +1,7 @@
 const express = require('express');
 const logger = require('./config/logger.js');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json');
 
 // Configuring the database
 const dbConfig = require('./config/database.js');
@@ -20,10 +22,12 @@ app.get('/', (req, res) => {
     res.json({ "message": "Welcome to Employee Payroll Application." });
 });
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Require employee payroll routes
 require('./app/routers/employeepayroll.js')(app);
 
 // listen for requests
-module.exports = 
-    app.listen(process.env.port, () => 
+module.exports =
+    app.listen(process.env.port, () =>
         logger.info("Server is listening on port " + process.env.port));

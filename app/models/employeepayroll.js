@@ -2,23 +2,23 @@ const mongoose = require('mongoose');
 
 const EmployeeSchema = new mongoose.Schema({
     firstName: {
-        type : String,
+        type: String,
         required: true,
-        validate : /^[A-Z]{1}[A-Za-z\\s]{1,}$/
+        validate: /^[A-Z]{1}[A-Za-z\\s]{1,}$/
     },
     lastName: {
-        type : String,
+        type: String,
         required: true,
-        validate : /^[A-Z]{1}[A-Za-z\\s]{1,}$/
+        validate: /^[A-Z]{1}[A-Za-z\\s]{1,}$/
     },
-    emailId:  {
-        type : String,
+    emailId: {
+        type: String,
         required: true,
         createIndexes: true,
-        validate :  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    } ,
+        validate: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    },
     password: {
-        type : String,
+        type: String,
         required: true,
     }
 }, {
@@ -86,7 +86,7 @@ class EmployeeModel {
      * @param oldemployee_Id, NewData
      * @return callback is used to callback Service
      */
-     findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
+    findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndUpdate(employeeDataId, {
             firstName: newData.firstName,
             lastName: newData.lastName,
@@ -123,11 +123,11 @@ class EmployeeModel {
     * @return callback is used to callback service
     */
     checkLogin = (userloginData, callBack) => {
-        EmployeePayroll.findOne({ "emailId" : userloginData.emailId}, (error, data) => {
-            if(error) {
+        EmployeePayroll.findOne({ "emailId": userloginData.emailId }, (error, data) => {
+            if (error) {
                 return callBack(error, null);
             }// if(!data){
-               // return callBack("Invalid login Details", data);
+            // return callBack("Invalid login Details", data);
             //}
             return (!data) ? callBack("user doesn't exist", null) : callBack(null, data);
         })

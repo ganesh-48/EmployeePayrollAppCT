@@ -1,33 +1,27 @@
 {
-    "Data1":
-        {
-            "emailId": "shivsunder@gmail.com",
-            "password": "Sunder@345"
-        },
-    "Data2":
-        {
-            "emailId": "shiv@gmail.com",
-            "password": "Sunder@345"
-        },
-    "Data3":
-        {
-            "firstName": "Shiv",
-            "lastName": "Sunder", 
-            "emailId": "shivsunder@gmail.com", 
-            "password": "Sunder@345"
-        },
-    "Data4":
-        {
-            "firstName": "Shiv",
-            "lastName": "Sunder", 
-            "emailId": "shivsunder@gmail.com"
-        },
-    "Data5":
-        {
-            "Id": "60bcaaef5ed3e22dd469eeb4"
-        },
-    "Data6":
-        {
-            "Id": "60bcaaef5ed3e22dd469"
-        }
+    "Data1": {
+        "emailId": "shivsunder@gmail.com",
+        "password": "Sunder@345"
+    },
+    "Data2": {
+        "emailId": "shiv@gmail.com",
+        "password": "Sunder@345"
+    },
+    "Data3": {
+        "firstName": "Shiv",
+        "lastName": "Sunder",
+        "emailId": "shivsunder@gmail.com",
+        "password": "Sunder@345"
+    },
+    "Data4": {
+        "firstName": "Shiv",
+        "lastName": "Sunder",
+        "emailId": "shivsunder@gmail.com"
+    },
+    "Data5": {
+        "Id": "60bcaaef5ed3e22dd469eeb4"
+    },
+    "Data6": {
+        "Id": "60bcaaef5ed3e22dd469"
+    }
 }

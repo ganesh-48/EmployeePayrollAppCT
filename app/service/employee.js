@@ -1,6 +1,6 @@
 const employeeDetails = require("../models/employeepayroll.js");
 const { genSaltSync, hashSync } = require("bcrypt");
-const { sign }= require('jsonwebtoken');
+const { sign } = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require("dotenv").config();
 
@@ -15,17 +15,17 @@ class RegisterService {
         const salt = genSaltSync(10);
         employeeData.password = hashSync(employeeData.password, salt);
         employeeDetails.create(employeeData, (error, data) => {
-            return (error) ? callBack(error, null) : callBack(null, data);            
+            return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
                 return callBack(error, null);
             return callBack(null, data)*/
         })
     }
 
-     /**
-    * @description retrive all the employee data
-    * @return callback is used to callback Controller 
-    */
+    /**
+   * @description retrive all the employee data
+   * @return callback is used to callback Controller 
+   */
     findUsersAllData = (callBack) => {
         employeeDetails.findUsersAllData((error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
@@ -48,12 +48,12 @@ class RegisterService {
         })
     }
 
-     /**
-    * @description Find employee data by id and save the employee data and password aslo  encrypts
-    * @param newData is data sent from Controller
-    * @return callback is used to callback Controller
-    */
-      findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
+    /**
+   * @description Find employee data by id and save the employee data and password aslo  encrypts
+   * @param newData is data sent from Controller
+   * @return callback is used to callback Controller
+   */
+    findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
         employeeDetails.findUserIdAndUpdate(newData, employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
             /*if (error)
@@ -62,10 +62,10 @@ class RegisterService {
         })
     }
 
-     /**
-    * @description delete employee data using employee id
-    * @return callback is used to callback Controller
-    */
+    /**
+   * @description delete employee data using employee id
+   * @return callback is used to callback Controller
+   */
     findUserIdAndRemove = (employeeDataId, callBack) => {
         employeeDetails.findUserIdAndRemove(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
@@ -83,11 +83,11 @@ class RegisterService {
     checkLogin = (userloginData, callBack) => {
         employeeDetails.checkLogin(userloginData, (error, data) => {
             //return (error) ? callBack(error, null) : callBack(null, data);
-            let result=null;
+            let result = null;
             if (error) {
                 return callBack(error, null);
             }
-            else if (result=bcrypt.compareSync(userloginData.password, data.password)) {
+            else if (result = bcrypt.compareSync(userloginData.password, data.password)) {
                 data.password = undefined;
                 const jsontoken = sign({ result: data }, process.env.jwt, { expiresIn: "2h" });
                 return callBack(null, jsontoken);

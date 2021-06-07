@@ -73,12 +73,12 @@ describe('POST/add', () => {
                 res.should.have.status(400);
                 res.body.should.be.property('success').eq(false);
                 res.body.should.be.property('message')
-            done();
+                done();
             });
     });
 });
 
-let token='';
+let token = '';
 beforeEach(done => {
     chai
         .request(server)
@@ -87,12 +87,12 @@ beforeEach(done => {
         .end((err, res) => {
             token = res.body.token;
             res.should.have.status(200);
-        done();
+            done();
         });
 });
 
-describe("/GET /getdata", () => { 
-    
+describe("/GET /getdata", () => {
+
     it("it should fetch all employeeData successfully with valid token ", done => {
         chai
             .request(server)
@@ -102,7 +102,7 @@ describe("/GET /getdata", () => {
                 res.should.have.status(200);
                 res.body.should.have.property('message').eq("Getted all employees data!")
                 res.body.should.have.property('data')
-            done();
+                done();
             });
     });
 
@@ -115,12 +115,12 @@ describe("/GET /getdata", () => {
                 res.should.have.status(400);
                 res.body.should.have.property('success').eq(false);
                 res.body.should.have.property('message').eq("Invalid token");
-            done();
+                done();
             });
     });
 
     it("it should not fetch all employeeData with empty token ", done => {
-        var emptyToken='';
+        var emptyToken = '';
         chai
             .request(server)
             .get("/getdata")
@@ -129,53 +129,53 @@ describe("/GET /getdata", () => {
                 res.should.have.status(401);
                 res.body.should.have.property('success').eq(false);
                 res.body.should.have.property('message').eq("Access denied! unauthorized user")
-            done();
+                done();
             });
     });
 });
 
 
-describe("/GET /find/Id", () => { 
-    
+describe("/GET /find/Id", () => {
+
     it("it should give employeeData successfully with valid token and Object Id", done => {
         chai
             .request(server)
-            .get("/find/"+employeetest.Data5.Id)
+            .get("/find/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('success').eq(true);
                 res.body.should.have.property('data');
-            done();
+                done();
             });
     });
 
     it("it not should give employeeData  with valid token and invalid and Object Id ", done => {
-        
+
         chai
             .request(server)
-            .get("/find/"+employeetest.Data6.Id)
+            .get("/find/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
             .end((err, res) => {
                 res.should.have.status(404);
                 res.body.should.have.property('success').eq(false);
-            done();
+                done();
             });
     });
 });
 
-describe("/PUT /update/Id", () => { 
+describe("/PUT /update/Id", () => {
     it("it should update employeeData successfully with valid token and Object Id ", done => {
         const employeeData = employeetest.Data3;
         chai
             .request(server)
-            .put("/update/"+employeetest.Data5.Id)
+            .put("/update/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('success').eq(true);
-            done();
+                done();
             });
     });
 
@@ -183,24 +183,24 @@ describe("/PUT /update/Id", () => {
         const employeeData = employeetest.Data3;
         chai
             .request(server)
-            .put("/update/"+employeetest.Data6.Id)
+            .put("/update/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
             .end((err, res) => {
                 res.should.have.status(404);
                 res.body.should.have.property('success').eq(false);
                 res.body.should.have.property('message').eq(" Employee payroll id not found ");
-            done();
+                done();
             });
     });
 });
 
-describe("/Delele /Id", () => { 
-    
+describe("/Delele /Id", () => {
+
     it("it should delete employeeData successfully with valid token and Object Id ", done => {
         chai
             .request(server)
-            .delete("/delete/"+employeetest.Data5.Id)
+            .delete("/delete/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
             .end((err, response) => {
                 response.should.have.status(200);
@@ -212,7 +212,7 @@ describe("/Delele /Id", () => {
     it("it not should delete employeeData  with valid token and invalid and Object Id ", done => {
         chai
             .request(server)
-            .delete("/delete/"+employeetest.Data6.Id)
+            .delete("/delete/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
             .end((err, response) => {
                 response.should.have.status(404);

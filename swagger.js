@@ -3,7 +3,7 @@ const swaggerAutogen = require('swagger-autogen')();
 const doc = {
     info: {
         title: 'Employee Schema',
-        description: 'Employee Registration Data',
+        description: 'Employee Registration',
     },
     host: 'localhost:5500',
     schemes: ['http'],
