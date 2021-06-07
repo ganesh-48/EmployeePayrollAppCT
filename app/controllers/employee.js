@@ -1,4 +1,4 @@
-const data = require('../validation/employee.js');
+const data = require('../middleware/employee.js');
 const service = require('../service/employee.js');
 
 class EmployeeDetails {

@@ -90,7 +90,6 @@ class RegisterService {
             else if (result=bcrypt.compareSync(userloginData.password, data.password)) {
                 data.password = undefined;
                 const jsontoken = sign({ result: data }, process.env.jwt, { expiresIn: "2h" });
-                //return (!jsontoken) ? callback("Something went wrong while generating JWT", null) : callback(null, jsontoken)
                 return callBack(null, jsontoken);
             }
             return callBack("Invalid userlogindata", null);

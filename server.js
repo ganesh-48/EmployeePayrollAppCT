@@ -1,4 +1,5 @@
 const express = require('express');
+const  logger = require('winston');
 
 // Configuring the database
 const dbConfig = require('./config/database.js');
@@ -23,4 +24,6 @@ app.get('/', (req, res) => {
 require('./app/routers/employeepayroll.js')(app);
 
 // listen for requests
-module.exports = app.listen(process.env.port, () => console.log("Server is listening on port " + process.env.port));
+module.exports = 
+    app.listen(process.env.port, () => 
+        logger.info("Server is listening on port " + process.env.port));
