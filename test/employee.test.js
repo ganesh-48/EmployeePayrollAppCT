@@ -79,6 +79,7 @@ describe('POST/add', () => {
 });
 
 let token = '';
+console.log(token);
 beforeEach(done => {
     chai
         .request(server)

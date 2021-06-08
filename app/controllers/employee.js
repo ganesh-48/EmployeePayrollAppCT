@@ -132,7 +132,7 @@ class EmployeeDetails {
                     message: error
                 })
             }
-            res.send({
+            res.status(200).send({
                 success : true,
                 message : "User Login Successfull!!",
                 token : data
