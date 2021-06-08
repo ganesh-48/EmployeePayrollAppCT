@@ -184,6 +184,17 @@
       "type": "string"
       }
       }
-      }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+        "emailId": {
+        "type": "string"
+        },
+        "password": {
+        "type": "string"
+        }
+        }
+        }
   }
 }
