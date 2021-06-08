@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
     res.json({ "message": "Welcome to Employee Payroll Application." });
 });
 
-
 // Require employee payroll routes
 require('./app/routers/employeepayroll.js')(app);
 
