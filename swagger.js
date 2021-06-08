@@ -12,5 +12,4 @@ const doc = {
 const outputFile = './swagger-output.json';
 const endpointsFiles = ['./app/routers/employeepayroll.js'];
 
-
 swaggerAutogen(outputFile, endpointsFiles, doc);

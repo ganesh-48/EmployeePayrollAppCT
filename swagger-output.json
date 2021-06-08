@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Employee Schema",
-    "description": "Employee Registration Data",
+    "description": "Employee Registration",
     "version": "1.0.0"
   },
   "host": "localhost:5500",
@@ -18,7 +18,17 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+            "$ref": "#/definitions/User"
+            }
+            }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -85,6 +95,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "newData",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
@@ -129,7 +148,17 @@
       "post": {
         "tags": [],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+            "$ref": "#/definitions/Login"
+            }
+            }
+        ],
         "responses": {
           "404": {
             "description": "Not Found"
@@ -138,5 +167,23 @@
       }
     }
   },
-  "definitions": {}
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+      "firstName": {
+      "type": "string"
+      },
+      "lastName": {
+      "type": "string"
+      },
+      "emailId": {
+      "type": "string"
+      },
+      "password": {
+      "type": "string"
+      }
+      }
+      }
+  }
 }
