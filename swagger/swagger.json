@@ -57,7 +57,12 @@
                     "404": {
                         "description": "Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "APIKEY": []
+                    }
+                ]
             }
         },
         "/find/{employeepayrollId}": {
@@ -73,6 +78,9 @@
                     }
                 ],
                 "responses": {
+                    "200":{
+                        "description":"successfull"
+                      },
                     "400": {
                         "description": "Bad Request"
                     },
@@ -82,7 +90,12 @@
                     "404": {
                         "description": "Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "APIKEY": []
+                    }
+                ]
             }
         },
         "/update/{employeepayrollId}": {
@@ -97,8 +110,8 @@
                         "type": "string"
                     },
                     {
-                        "in": "newData",
-                        "name": "body",
+                        "in": "body",
+                        "name": "newData",
                         "description": "Pet object that needs to be added to the store",
                         "required": true,
                         "schema": {
@@ -116,7 +129,12 @@
                     "404": {
                         "description": "Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "APIKEY": []
+                    }
+                ]
             }
         },
         "/delete/{employeepayrollId}": {
@@ -141,7 +159,12 @@
                     "404": {
                         "description": "Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "APIKEY": []
+                    }
+                ]
             }
         },
         "/userlogin": {
@@ -165,6 +188,13 @@
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "APIKEY": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     },
     "definitions": {

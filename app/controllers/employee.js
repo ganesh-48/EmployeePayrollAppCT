@@ -159,7 +159,7 @@ module.exports = new EmployeeDetails();
                             message: err.message || "Some error occurred while creating the employee payroll."
                         });
                     });
-            };
+            };  
         
         // Retrieve and return all employee payroll from the database.
         findAll = (req, res) => {

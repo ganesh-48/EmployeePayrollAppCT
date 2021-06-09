@@ -1,11 +1,8 @@
 const chai = require('chai');
 const server = require('../server');
 const chaiHttp = require("chai-http");
-const employee = require('../app/service/employee.js');
 chai.should();
 chai.use(chaiHttp);
-var expect = require('chai').expect;
-var request = require('supertest');
 
 const fs = require('fs');
 let rawdata = fs.readFileSync('test/employee.json');
@@ -42,12 +39,6 @@ describe('POST/userlogin', () => {
 describe('POST/add', () => {
     it('It should POST a  employee data', (done) => {
         const employeeData = employeetest.Data3;
-        /*const employeeData = {
-            firstName: "Shiv",
-            lastName: "Sunder",
-            emailId: "shivsunder@gmail.com",
-            password: "Sunder@345"
-        };*/
         chai.request(server)
             .post('/add')
             .send(employeeData)
@@ -61,11 +52,6 @@ describe('POST/add', () => {
 
     it('It should POST a  employee data', (done) => {
         const employeeData = employeetest.Data4;
-        /*const employeeData = {
-            firstName: "Shiv",
-            lastName: "Sunder",
-            emailId: "shivsunder@gmail.com"
-        };*/
         chai.request(server)
             .post('/add')
             .send(employeeData)
@@ -85,7 +71,7 @@ beforeEach(done => {
         .request(server)
         .post("/userlogin")
         .send(employeetest.Data1)
-        .end((err, res) => {
+        .end((error, res) => {
             token = res.body.token;
             res.should.have.status(200);
             done();
@@ -99,7 +85,7 @@ describe("/GET /getdata", () => {
             .request(server)
             .get("/getdata")
             .set('Authorization', 'bearar ' + token)
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('message').eq("Getted all employees data!")
                 res.body.should.have.property('data')
@@ -112,7 +98,7 @@ describe("/GET /getdata", () => {
             .request(server)
             .get("/getdata")
             .set('Authorization', 'bearar ' + token.slice(10))
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(400);
                 res.body.should.have.property('success').eq(false);
                 res.body.should.have.property('message').eq("Invalid token");
@@ -126,7 +112,7 @@ describe("/GET /getdata", () => {
             .request(server)
             .get("/getdata")
             .set('Authorization', emptyToken)
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(401);
                 res.body.should.have.property('success').eq(false);
                 res.body.should.have.property('message').eq("Access denied! unauthorized user")
@@ -143,7 +129,7 @@ describe("/GET /find/Id", () => {
             .request(server)
             .get("/find/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('success').eq(true);
                 res.body.should.have.property('data');
@@ -157,7 +143,7 @@ describe("/GET /find/Id", () => {
             .request(server)
             .get("/find/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(404);
                 res.body.should.have.property('success').eq(false);
                 done();
@@ -173,7 +159,7 @@ describe("/PUT /update/Id", () => {
             .put("/update/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(200);
                 res.body.should.have.property('success').eq(true);
                 done();
@@ -187,7 +173,7 @@ describe("/PUT /update/Id", () => {
             .put("/update/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
-            .end((err, res) => {
+            .end((error, res) => {
                 res.should.have.status(404);
                 res.body.should.have.property('success').eq(false);
                 res.body.should.have.property('message').eq(" Employee payroll id not found ");
@@ -203,7 +189,7 @@ describe("/Delele /Id", () => {
             .request(server)
             .delete("/delete/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
-            .end((err, response) => {
+            .end((error, response) => {
                 response.should.have.status(200);
                 response.body.should.have.property('success').eq(true);
                 done();
@@ -215,7 +201,7 @@ describe("/Delele /Id", () => {
             .request(server)
             .delete("/delete/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
-            .end((err, response) => {
+            .end((error, response) => {
                 response.should.have.status(404);
                 response.body.should.have.property('success').eq(false);
                 done();
