@@ -189,9 +189,9 @@ describe("/Delele /Id", () => {
             .request(server)
             .delete("/delete/" + employeetest.Data5.Id)
             .set('Authorization', 'bearar ' + token)
-            .end((error, response) => {
-                response.should.have.status(200);
-                response.body.should.have.property('success').eq(true);
+            .end((error, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('success').eq(true);
                 done();
             });
     });
@@ -201,9 +201,9 @@ describe("/Delele /Id", () => {
             .request(server)
             .delete("/delete/" + employeetest.Data6.Id)
             .set('Authorization', 'bearar ' + token)
-            .end((error, response) => {
-                response.should.have.status(404);
-                response.body.should.have.property('success').eq(false);
+            .end((error, res) => {
+                res.should.have.status(404);
+                res.body.should.have.property('success').eq(false);
                 done();
             });
     });
