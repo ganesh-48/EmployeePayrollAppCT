@@ -9,7 +9,7 @@ let rawdata = fs.readFileSync('test/employee.json');
 let employeetest = JSON.parse(rawdata);
 
 describe('POST/userlogin', () => {
-    it('It should POST new user login employee data', (done) => {
+    it('It is passing a employeeData and doing user login should return a status 200 and gives success=true', (done) => {
         const employeeData = employeetest.Data1;
         chai.request(server)
             .post('/userlogin')
@@ -23,7 +23,7 @@ describe('POST/userlogin', () => {
             });
     });
 
-    it('It should POST new user login employeeData1and return status 404', (done) => {
+    it('It is passing a employeeData and doing user login should return a status 400 and gives success=false', (done) => {
         const employeeData = employeetest.Data2;
         chai.request(server)
             .post('/userlogin')
@@ -37,7 +37,7 @@ describe('POST/userlogin', () => {
 });
 
 describe('POST/add', () => {
-    it('It should POST a  employee data', (done) => {
+    it('It is passing a employee new data in manogodb when added it return a status = 200 and success = true', (done) => {
         const employeeData = employeetest.Data3;
         chai.request(server)
             .post('/add')
@@ -50,7 +50,7 @@ describe('POST/add', () => {
             });
     });
 
-    it('It should POST a  employee data', (done) => {
+    it('It should POST passing a employee data when added wrong data then it return status=400 and success=false', (done) => {
         const employeeData = employeetest.Data4;
         chai.request(server)
             .post('/add')
@@ -80,7 +80,7 @@ beforeEach(done => {
 
 describe("/GET /getdata", () => {
 
-    it("it should fetch all employeeData successfully with valid token ", done => {
+    it("It should fetch all employeeData successfully with valid token using authorize then return a status=200 and success=true", done => {
         chai
             .request(server)
             .get("/getdata")
@@ -93,7 +93,7 @@ describe("/GET /getdata", () => {
             });
     });
 
-    it("it should not fetch all employeeData with invalid valid token", done => {
+    it("It should fetch all employeeData successfully with invalid token using authorize then return a status=400 and success=false", done => {
         chai
             .request(server)
             .get("/getdata")
@@ -106,7 +106,7 @@ describe("/GET /getdata", () => {
             });
     });
 
-    it("it should not fetch all employeeData with empty token ", done => {
+    it("It should fetch all employeeData successfully with empty token using authorize then return a status=401 and success=false", done => {
         var emptyToken = '';
         chai
             .request(server)
@@ -124,7 +124,7 @@ describe("/GET /getdata", () => {
 
 describe("/GET /find/Id", () => {
 
-    it("it should give employeeData successfully with valid token and Object Id", done => {
+    it("It should give employeeData checking valid token and find using employeeId should return status=200 and success=true", done => {
         chai
             .request(server)
             .get("/find/" + employeetest.Data5.Id)
@@ -137,7 +137,7 @@ describe("/GET /find/Id", () => {
             });
     });
 
-    it("it not should give employeeData  with valid token and invalid and Object Id ", done => {
+    it("It should not given employeeData checking invalid token and find using employeeId should return status=404 and success=false", done => {
 
         chai
             .request(server)
@@ -152,7 +152,7 @@ describe("/GET /find/Id", () => {
 });
 
 describe("/PUT /update/Id", () => {
-    it("it should update employeeData successfully with valid token and Object Id ", done => {
+    it("It should  update the employeeData checking valid token and update using employeeId should return status=200 and success=true", done => {
         const employeeData = employeetest.Data3;
         chai
             .request(server)
@@ -166,7 +166,7 @@ describe("/PUT /update/Id", () => {
             });
     });
 
-    it("it should not update employeeData with valid token and invalid Object Id ", done => {
+    it("It should not update employeeData checking invalid token and find using employeeId should return status=404 and success=false", done => {
         const employeeData = employeetest.Data3;
         chai
             .request(server)
@@ -184,7 +184,7 @@ describe("/PUT /update/Id", () => {
 
 describe("/Delele /Id", () => {
 
-    it("it should delete employeeData successfully with valid token and Object Id ", done => {
+    it("It should delete given employeeData checking valid token and delete using employeeId should return status=200 and success=true", done => {
         chai
             .request(server)
             .delete("/delete/" + employeetest.Data5.Id)
@@ -196,7 +196,7 @@ describe("/Delele /Id", () => {
             });
     });
 
-    it("it not should delete employeeData  with valid token and invalid and Object Id ", done => {
+    it("It should not delete given employeeData checking invalid token and delete using employeeId should return status=404 and success=false", done => {
         chai
             .request(server)
             .delete("/delete/" + employeetest.Data6.Id)
