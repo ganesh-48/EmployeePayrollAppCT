@@ -7,13 +7,11 @@ const logger = createLogger({
             level: 'info',
             format: format.combine(format.timestamp(), format.simple())
         }),
-    ],
-    transports: [
-        new transports.File({
+        transports.File({
             filename: 'logger/error.log',
             level: 'error',
             format: format.combine(format.timestamp(), format.simple())
         })
-    ]
+    ],
 })
 module.exports = logger;
