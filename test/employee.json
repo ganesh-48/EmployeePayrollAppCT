@@ -1,26 +1,26 @@
 {
-    "Data1": {
+    "EmployeeLoginDataValid": {
         "emailId": "virat@gmail.com", "password": "Virat@2552"
     },
-    "Data2": {
+    "EmployeeLoginDataInvalidalid": {
         "emailId": "shiv@gmail.com",
         "password": "Sunder@345"
     },
-    "Data3": {
+    "EmployeeAddDataValid": {
         "firstName": "Shiv",
         "lastName": "Sunder",
         "emailId": "shivsunder@gmail.com",
         "password": "Sunder@345"
     },
-    "Data4": {
+    "EmployeeAddDataInalid": {
         "firstName": "Shiv",
         "lastName": "Sunder",
         "emailId": "shivsunder@gmail.com"
     },
-    "Data5": {
+    "EmployeeFindDataValid": {
         "Id": "60bcaaef5ed3e22dd469eeb4"
     },
-    "Data6": {
+    "EmployeeFindDataInvalid": {
         "Id": "60bcaaef5ed3e22dd469"
     }
 }

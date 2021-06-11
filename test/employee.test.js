@@ -6,11 +6,11 @@ chai.use(chaiHttp);
 
 const fs = require('fs');
 let rawdata = fs.readFileSync('test/employee.json');
-let employeetest = JSON.parse(rawdata);
+let employeeInput = JSON.parse(rawdata);
 
 describe('POST/userlogin', () => {
-    it('given employee data when user login should return a status 200 and success=true', (done) => {
-        const employeeData = employeetest.Data1;
+    it('givenEmployeeData_whenUserLogin_shouldReturnStatus200AndSuccess=true', (done) => {
+        const employeeData = employeeInput.EmployeeLoginDataValid;
         chai.request(server)
             .post('/userlogin')
             .send(employeeData)
@@ -23,8 +23,8 @@ describe('POST/userlogin', () => {
             });
     });
 
-    it('given employee data when user login wrong should return a status 400 and  success=false', (done) => {
-        const employeeData = employeetest.Data2;
+    it('givenEmployeeData_whenUserLoginWrong_shouldReturnStatus400AndSuccess=false', (done) => {
+        const employeeData = employeeInput.EmployeeLoginDataInvalid;
         chai.request(server)
             .post('/userlogin')
             .send(employeeData)
@@ -37,8 +37,8 @@ describe('POST/userlogin', () => {
 });
 
 describe('POST/add', () => {
-    it('given employee data when added should return a status = 200 and success = true', (done) => {
-        const employeeData = employeetest.Data3;
+    it('givenEmployeeData_whenAdded_shouldReturnStatus=200AndSuccess=true', (done) => {
+        const employeeData = employeeInput.EmployeeAddDataValid;
         chai.request(server)
             .post('/add')
             .send(employeeData)
@@ -50,8 +50,8 @@ describe('POST/add', () => {
             });
     });
 
-    it('given employee data when added wrong should return status=400 and success=false', (done) => {
-        const employeeData = employeetest.Data4;
+    it('givenEmployeeData_whenAddedWrong_shouldReturnStatus=400AndSuccess=false', (done) => {
+        const employeeData = employeeInput.EmployeeAddDataInvalid;
         chai.request(server)
             .post('/add')
             .send(employeeData)
@@ -70,7 +70,7 @@ beforeEach(done => {
     chai
         .request(server)
         .post("/userlogin")
-        .send(employeetest.Data1)
+        .send(employeeInput.EmployeeLoginDataValid)
         .end((error, res) => {
             token = res.body.token;
             res.should.have.status(200);
@@ -80,7 +80,7 @@ beforeEach(done => {
 
 describe("/GET /getdata", () => {
 
-    it("given valid token when get all employee data should return status=200 and success=true", done => {
+    it("givenValidToken_whenGetAllEmployeeData_shouldReturnStatus=200AndSuccess=true", done => {
         chai
             .request(server)
             .get("/getdata")
@@ -93,7 +93,7 @@ describe("/GET /getdata", () => {
             });
     });
 
-    it("given invalid token when not get data should return  status=400 and success=false", done => {
+    it("givenInvalidToken_whenNotGetData_shouldReturnStatus=400AndSuccess=false", done => {
         chai
             .request(server)
             .get("/getdata")
@@ -106,7 +106,7 @@ describe("/GET /getdata", () => {
             });
     });
 
-    it("given empty token when get data should return  status=401 and success=false", done => {
+    it("givenEmptyToken_whenGetData_shouldReturnStatus=401AndSuccess=false", done => {
         var emptyToken = '';
         chai
             .request(server)
@@ -124,10 +124,10 @@ describe("/GET /getdata", () => {
 
 describe("/GET /find/Id", () => {
 
-    it("given valid token and employee Id when find should return status=200 and success=true", done => {
+    it("givenValidTokenAndEmployeeId_whenFind_shouldReturnStatus=200AndSuccess=true", done => {
         chai
             .request(server)
-            .get("/find/" + employeetest.Data5.Id)
+            .get("/find/" + employeeInput.EmployeeFindDataValid.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(200);
@@ -137,11 +137,11 @@ describe("/GET /find/Id", () => {
             });
     });
 
-    it("given valid token and invalid employee id when find should return status=404 and success=false", done => {
+    it("givenValidTokenAndInvalidEmployeeId_whenFind_shouldReturnStatus=404AndSuccess=false", done => {
 
         chai
             .request(server)
-            .get("/find/" + employeetest.Data6.Id)
+            .get("/find/" + employeeInput.EmployeeFindDataInvalid.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(404);
@@ -152,11 +152,11 @@ describe("/GET /find/Id", () => {
 });
 
 describe("/PUT /update/Id", () => {
-    it("given valid token and employee data when update using Id should return status=200 and success=true", done => {
-        const employeeData = employeetest.Data3;
+    it("givenValidTokenAndEmployeeData_whenUpdateUsingId_shouldReturnStatus=200AndSuccess=true", done => {
+        const employeeData = employeeInput.EmployeeAddDataValid;
         chai
             .request(server)
-            .put("/update/" + employeetest.Data5.Id)
+            .put("/update/" + employeeInput.EmployeeFindDataValid.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
             .end((error, res) => {
@@ -166,11 +166,11 @@ describe("/PUT /update/Id", () => {
             });
     });
 
-    it("given valid token and wrong employee data when update using Id should return status=404 and success=false", done => {
-        const employeeData = employeetest.Data3;
+    it("givenValidTokenAndWrongEmployeeData_whenUpdateUsingId_shouldReturnStatus=404AndSuccess=false", done => {
+        const employeeData = employeeInput.EmployeeAddDataValid;
         chai
             .request(server)
-            .put("/update/" + employeetest.Data6.Id)
+            .put("/update/" + employeeInput.EmployeeFindDataInvalid.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
             .end((error, res) => {
@@ -184,10 +184,10 @@ describe("/PUT /update/Id", () => {
 
 describe("/Delele /Id", () => {
 
-    it("given valid token and employee data when delete using Id should return status=200 and success=true", done => {
+    it("givenValidTokenAndEmployeeData_whenDeleteUsingId_shouldReturnStatus=200AndSuccess=true", done => {
         chai
             .request(server)
-            .delete("/delete/" + employeetest.Data5.Id)
+            .delete("/delete/" + employeeInput.EmployeeFindDataValid.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(200);
@@ -196,15 +196,15 @@ describe("/Delele /Id", () => {
             });
     });
 
-    it("given valid token and wrong employee data when delete using Id should return status=404 and success=false", done => {
+    it("givenValidTokenAndWrongEmployeeData_whenDeleteUsingId_shouldReturnStatus=404AndSuccess=false", done => {
         chai
             .request(server)
-            .delete("/delete/" + employeetest.Data6.Id)
+            .delete("/delete/" + employeeInput.EmployeeFindDataInvalid.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(404);
                 res.body.should.have.property('success').eq(false);
-                done();
+            done();
             });
     });
 
