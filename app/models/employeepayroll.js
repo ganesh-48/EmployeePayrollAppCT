@@ -44,10 +44,6 @@ class EmployeeModel {
 
         employeepayroll.save({}, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error) {
-                return callBack(error, null);
-            }
-            return callBack(null, data);*/
         });
     }
 
@@ -58,11 +54,6 @@ class EmployeeModel {
     findUsersAllData = (callBack) => {
         EmployeePayroll.find({}, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error) {
-                return callBack(error, null);
-            } else {
-                return callBack(null, data);
-            }*/
         })
     };
 
@@ -73,11 +64,6 @@ class EmployeeModel {
     findUserid = (employeeDataId, callBack) => {
         EmployeePayroll.findById(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error) {
-                return callBack(error, null);
-            } else {
-                return callBack(null, data);
-            }*/
         })
     }
 
@@ -94,11 +80,6 @@ class EmployeeModel {
             password: newData.password
         }, { new: true }, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error) {
-                return callBack(error, null);
-            } else {
-                return callBack(null, data);
-            }*/
         })
     }
 
@@ -109,11 +90,6 @@ class EmployeeModel {
     findUserIdAndRemove = (employeeDataId, callBack) => {
         EmployeePayroll.findByIdAndRemove(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error) {
-                return callBack(error, null);
-            } else {
-                return callBack(null, data);
-            }*/
         })
     }
 
@@ -126,9 +102,7 @@ class EmployeeModel {
         EmployeePayroll.findOne({ "emailId": userloginData.emailId }, (error, data) => {
             if (error) {
                 return callBack(error, null);
-            }// if(!data){
-            // return callBack("Invalid login Details", data);
-            //}
+            }
             return (!data) ? callBack("user doesn't exist", null) : callBack(null, data);
         })
     }

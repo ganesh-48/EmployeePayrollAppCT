@@ -16,9 +16,6 @@ class RegisterService {
         employeeData.password = hashSync(employeeData.password, salt);
         employeeDetails.create(employeeData, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error)
-                return callBack(error, null);
-            return callBack(null, data)*/
         })
     }
 
@@ -29,9 +26,6 @@ class RegisterService {
     findUsersAllData = (callBack) => {
         employeeDetails.findUsersAllData((error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error)
-                return callBack(error, null);
-            return callBack(null, data)*/
         })
     }
 
@@ -42,9 +36,6 @@ class RegisterService {
     findUserid = (employeeDataId, callBack) => {
         employeeDetails.findUserid(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error)
-                return callBack(error, null);
-            return callBack(null, data)*/
         })
     }
 
@@ -56,9 +47,6 @@ class RegisterService {
     findUserIdAndUpdate = (newData, employeeDataId, callBack) => {
         employeeDetails.findUserIdAndUpdate(newData, employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error)
-                return callBack(error, null);
-            return callBack(null, data)*/
         })
     }
 
@@ -69,9 +57,6 @@ class RegisterService {
     findUserIdAndRemove = (employeeDataId, callBack) => {
         employeeDetails.findUserIdAndRemove(employeeDataId, (error, data) => {
             return (error) ? callBack(error, null) : callBack(null, data);
-            /*if (error)
-                return callBack(error, null);
-            return callBack(null, data);*/
         })
     }
 
@@ -82,7 +67,6 @@ class RegisterService {
     */
     checkLogin = (userloginData, callBack) => {
         employeeDetails.checkLogin(userloginData, (error, data) => {
-            //return (error) ? callBack(error, null) : callBack(null, data);
             let result = null;
             if (error) {
                 return callBack(error, null);
