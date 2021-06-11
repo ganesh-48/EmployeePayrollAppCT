@@ -5,14 +5,13 @@ module.exports = {
         let token = req.get("authorization");
         if(token) {
             token = token.slice(7);
-            jwt.verify(token, process.env.jwt , ( error, decoded ) => {
+            jwt.verify(token, process.env.jwt , ( error ) => {
                 if(error) {
                     return res.status(400).send({
                         success: false,
                         message: "Invalid token"
                     });
                 } else {
-                    req.decoded = decoded;
                     next();
                 }
             });
