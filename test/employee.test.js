@@ -10,7 +10,7 @@ let employeeInput = JSON.parse(rawdata);
 
 describe('POST/userlogin', () => {
     it('givenEmployeeData_whenUserLogin_shouldReturnStatus200AndSuccess=true', (done) => {
-        const employeeData = employeeInput.EmployeeLoginDataValid;
+        const employeeData = employeeInput.UserLoginPos;
         chai.request(server)
             .post('/userlogin')
             .send(employeeData)
@@ -24,7 +24,7 @@ describe('POST/userlogin', () => {
     });
 
     it('givenEmployeeData_whenUserLoginWrong_shouldReturnStatus400AndSuccess=false', (done) => {
-        const employeeData = employeeInput.EmployeeLoginDataInvalid;
+        const employeeData = employeeInput.UserLoginNeg;
         chai.request(server)
             .post('/userlogin')
             .send(employeeData)
@@ -36,11 +36,11 @@ describe('POST/userlogin', () => {
     });
 });
 
-describe('POST/add', () => {
+describe('POST/add/employee', () => {
     it('givenEmployeeData_whenAdded_shouldReturnStatus=200AndSuccess=true', (done) => {
-        const employeeData = employeeInput.EmployeeAddDataValid;
+        const employeeData = employeeInput.EmployeeRegistrationPos;
         chai.request(server)
-            .post('/add')
+            .post('/add/employee')
             .send(employeeData)
             .end((error, res) => {
                 res.should.have.status(200);
@@ -51,9 +51,9 @@ describe('POST/add', () => {
     });
 
     it('givenEmployeeData_whenAddedWrong_shouldReturnStatus=400AndSuccess=false', (done) => {
-        const employeeData = employeeInput.EmployeeAddDataInvalid;
+        const employeeData = employeeInput.EmployeeRegistrationNeg;
         chai.request(server)
-            .post('/add')
+            .post('/add/employee')
             .send(employeeData)
             .end((error, res) => {
                 res.should.have.status(400);
@@ -70,7 +70,7 @@ beforeEach(done => {
     chai
         .request(server)
         .post("/userlogin")
-        .send(employeeInput.EmployeeLoginDataValid)
+        .send(employeeInput.UserLoginPos)
         .end((error, res) => {
             token = res.body.token;
             res.should.have.status(200);
@@ -78,15 +78,16 @@ beforeEach(done => {
         });
 });
 
-describe("/GET /getdata", () => {
+describe("/GET /getallemployee", () => {
 
     it("givenValidToken_whenGetAllEmployeeData_shouldReturnStatus=200AndSuccess=true", done => {
         chai
             .request(server)
-            .get("/getdata")
+            .get("/getallemployee")
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(200);
+                res.body.should.have.property('success').eq(true)
                 res.body.should.have.property('message').eq("Getted all employees data!")
                 res.body.should.have.property('data')
                 done();
@@ -96,7 +97,7 @@ describe("/GET /getdata", () => {
     it("givenInvalidToken_whenNotGetData_shouldReturnStatus=400AndSuccess=false", done => {
         chai
             .request(server)
-            .get("/getdata")
+            .get("/getallemployee")
             .set('Authorization', 'bearar ' + token.slice(10))
             .end((error, res) => {
                 res.should.have.status(400);
@@ -110,7 +111,7 @@ describe("/GET /getdata", () => {
         var emptyToken = '';
         chai
             .request(server)
-            .get("/getdata")
+            .get("/getallemployee")
             .set('Authorization', emptyToken)
             .end((error, res) => {
                 res.should.have.status(401);
@@ -122,12 +123,12 @@ describe("/GET /getdata", () => {
 });
 
 
-describe("/GET /find/Id", () => {
+describe("/GET /findemployeedata/Id", () => {
 
     it("givenValidTokenAndEmployeeId_whenFind_shouldReturnStatus=200AndSuccess=true", done => {
         chai
             .request(server)
-            .get("/find/" + employeeInput.EmployeeFindDataValid.Id)
+            .get("/findemployeedata/" + employeeInput.EmployeeGetSingleDataPos.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(200);
@@ -141,7 +142,7 @@ describe("/GET /find/Id", () => {
 
         chai
             .request(server)
-            .get("/find/" + employeeInput.EmployeeFindDataInvalid.Id)
+            .get("/findemployeedata/" + employeeInput.EmployeeGetSingleDataNeg.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(404);
@@ -151,12 +152,12 @@ describe("/GET /find/Id", () => {
     });
 });
 
-describe("/PUT /update/Id", () => {
+describe("/PUT /update/employeedata/Id", () => {
     it("givenValidTokenAndEmployeeData_whenUpdateUsingId_shouldReturnStatus=200AndSuccess=true", done => {
-        const employeeData = employeeInput.EmployeeAddDataValid;
+        const employeeData = employeeInput.EmployeeRegistrationPos;
         chai
             .request(server)
-            .put("/update/" + employeeInput.EmployeeFindDataValid.Id)
+            .put("/update/employeedata/" + employeeInput.EmployeeGetSingleDataPos.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
             .end((error, res) => {
@@ -167,10 +168,10 @@ describe("/PUT /update/Id", () => {
     });
 
     it("givenValidTokenAndWrongEmployeeData_whenUpdateUsingId_shouldReturnStatus=404AndSuccess=false", done => {
-        const employeeData = employeeInput.EmployeeAddDataValid;
+        const employeeData = employeeInput.EmployeeRegistrationPos;
         chai
             .request(server)
-            .put("/update/" + employeeInput.EmployeeFindDataInvalid.Id)
+            .put("/update/employeedata/" + employeeInput.EmployeeGetSingleDataNeg.Id)
             .set('Authorization', 'bearar ' + token)
             .send(employeeData)
             .end((error, res) => {
@@ -182,12 +183,12 @@ describe("/PUT /update/Id", () => {
     });
 });
 
-describe("/Delele /Id", () => {
+describe("/delete/employeedata/Id", () => {
 
     it("givenValidTokenAndEmployeeData_whenDeleteUsingId_shouldReturnStatus=200AndSuccess=true", done => {
         chai
             .request(server)
-            .delete("/delete/" + employeeInput.EmployeeFindDataValid.Id)
+            .delete("/delete/employeedata/" + employeeInput.EmployeeGetSingleDataPos.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(200);
@@ -199,7 +200,7 @@ describe("/Delele /Id", () => {
     it("givenValidTokenAndWrongEmployeeData_whenDeleteUsingId_shouldReturnStatus=404AndSuccess=false", done => {
         chai
             .request(server)
-            .delete("/delete/" + employeeInput.EmployeeFindDataInvalid.Id)
+            .delete("/delete/employeedata/" + employeeInput.EmployeeGetSingleDataNeg.Id)
             .set('Authorization', 'bearar ' + token)
             .end((error, res) => {
                 res.should.have.status(404);

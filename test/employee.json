@@ -1,26 +1,26 @@
 {
-    "EmployeeLoginDataValid": {
+    "UserLoginPos": {
         "emailId": "virat@gmail.com", "password": "Virat@2552"
     },
-    "EmployeeLoginDataInvalidalid": {
+    "UserLoginNeg": {
         "emailId": "shiv@gmail.com",
         "password": "Sunder@345"
     },
-    "EmployeeAddDataValid": {
+    "EmployeeRegistrationPos": {
         "firstName": "Shiv",
         "lastName": "Sunder",
         "emailId": "shivsunder@gmail.com",
         "password": "Sunder@345"
     },
-    "EmployeeAddDataInalid": {
+    "EmployeeRegistrationNeg": {
         "firstName": "Shiv",
         "lastName": "Sunder",
         "emailId": "shivsunder@gmail.com"
     },
-    "EmployeeFindDataValid": {
+    "EmployeeGetSingleDataPos": {
         "Id": "60bcaaef5ed3e22dd469eeb4"
     },
-    "EmployeeFindDataInvalid": {
+    "EmployeeGetSingleDataNeg": {
         "Id": "60bcaaef5ed3e22dd469"
     }
 }
