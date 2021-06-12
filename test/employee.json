@@ -1,8 +1,8 @@
 {
-    "UserLoginPos": {
+    "EmployeeLoginPos": {
         "emailId": "virat@gmail.com", "password": "Virat@2552"
     },
-    "UserLoginNeg": {
+    "EmployeeLoginNeg": {
         "emailId": "shiv@gmail.com",
         "password": "Sunder@345"
     },

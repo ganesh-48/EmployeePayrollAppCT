@@ -10,7 +10,7 @@ let employeeInput = JSON.parse(rawdata);
 
 describe('POST/userlogin', () => {
     it('givenEmployeeData_whenUserLogin_shouldReturnStatus200AndSuccess=true', (done) => {
-        const employeeData = employeeInput.UserLoginPos;
+        const employeeData = employeeInput.EmployeeLoginPos;
         chai.request(server)
             .post('/userlogin')
             .send(employeeData)
@@ -24,7 +24,7 @@ describe('POST/userlogin', () => {
     });
 
     it('givenEmployeeData_whenUserLoginWrong_shouldReturnStatus400AndSuccess=false', (done) => {
-        const employeeData = employeeInput.UserLoginNeg;
+        const employeeData = employeeInput.EmployeeLoginNeg;
         chai.request(server)
             .post('/userlogin')
             .send(employeeData)
@@ -70,7 +70,7 @@ beforeEach(done => {
     chai
         .request(server)
         .post("/userlogin")
-        .send(employeeInput.UserLoginPos)
+        .send(employeeInput.EmployeeLoginPos)
         .end((error, res) => {
             token = res.body.token;
             res.should.have.status(200);
